@@ -10,7 +10,6 @@ import com.crudspringboot.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
-	
 	@Autowired
 	private CategoriaRepository repo;
 	
@@ -18,5 +17,4 @@ public class CategoriaService {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
-	
 }

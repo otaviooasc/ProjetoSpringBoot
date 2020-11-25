@@ -12,13 +12,13 @@ import com.crudspringboot.domain.Categoria;
 import com.crudspringboot.services.CategoriaService;
 
 @RestController
-@RequestMapping(value="/categorias")
+@RequestMapping(value = "/categorias")
 public class CategoriaResource {
-	
+
 	@Autowired
 	private CategoriaService service;
-	
-	@RequestMapping(value="/{id}", method= RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Categoria obj = service.buscar(id);

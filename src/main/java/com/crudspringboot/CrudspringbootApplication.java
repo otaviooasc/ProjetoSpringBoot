@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.crudspringboot.domain.Categoria;
 import com.crudspringboot.domain.Cidade;
+import com.crudspringboot.domain.Cliente;
+import com.crudspringboot.domain.Endereco;
 import com.crudspringboot.domain.Estado;
 import com.crudspringboot.domain.Produto;
+import com.crudspringboot.domain.enums.TipoCliente;
 import com.crudspringboot.repositories.CategoriaRepository;
 import com.crudspringboot.repositories.CidadeRepository;
+import com.crudspringboot.repositories.ClienteRepository;
+import com.crudspringboot.repositories.EnderecoRepository;
 import com.crudspringboot.repositories.EstadoRepository;
 import com.crudspringboot.repositories.ProdutoRepository;
 
@@ -26,7 +31,11 @@ public class CrudspringbootApplication implements CommandLineRunner {
 	@Autowired
 	private EstadoRepository estadoRepository;
 	@Autowired
-	private CidadeRepository cidadeRepository; 
+	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CrudspringbootApplication.class, args);
@@ -63,6 +72,17 @@ public class CrudspringbootApplication implements CommandLineRunner {
 
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "12453-153", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("40028922", "456585258"));
+		
+		Endereco e1 = new Endereco(null, "Rua flores", "300", "apto 303", "jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Rua maria", "301", "apto 20002", "Dalle", "49922112", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 	}
 }
